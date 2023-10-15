@@ -31,7 +31,7 @@ export const register = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ email }, { maxTimeMS: 30000 });
 
     if (user) {
       return next(new ErrorHandler("User Already Exist", 404));
